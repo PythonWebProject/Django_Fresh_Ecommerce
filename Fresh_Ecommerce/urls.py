@@ -14,12 +14,30 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 # from django.contrib import admin
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.views.static import serve
+from rest_framework.documentation import include_docs_urls
+from rest_framework.routers import DefaultRouter
+
 import xadmin
-from Fresh_Ecommerce.settings import MEDIA_ROOT
+from .settings import MEDIA_ROOT
+from goods.views import GoodsListViewSet
+
+# Create a router and register our viewsets with it.
+
+router = DefaultRouter()
+
+# 配置goods的路由
+router.register(r'goods', GoodsListViewSet, basename='goods')
 
 urlpatterns = [
        url(r'^xadmin/', xadmin.site.urls),
        url(r'^media/(?P<path>.*)$', serve, {'document_root':MEDIA_ROOT}),
+       url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+       # 商品列表页
+       url(r'^', include(router.urls)),
+
+       # 文档路由
+       url(r'docs/', include_docs_urls(title='生鲜电商'))
 ]

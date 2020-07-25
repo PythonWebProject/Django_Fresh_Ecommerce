@@ -22,14 +22,14 @@ class UserProfile(AbstractUser):
         verbose_name_plural = '用户'
 
     def __str__(self):
-        return self.name
+        return self.username
 
 
 class VerifyCode(models.Model):
     code = models.CharField(max_length=10, verbose_name='验证码')
     mobile = models.CharField(max_length=11, verbose_name='电话')
 
-    add_time = models.DateField(default=datetime.now, verbose_name='添加时间')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')
 
     class Meta:

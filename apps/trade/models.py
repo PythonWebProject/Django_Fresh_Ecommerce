@@ -16,7 +16,7 @@ class ShoppingCart(models.Model):
     goods = models.ForeignKey(Goods, verbose_name='商品', null=True, on_delete=models.SET_NULL)
     nums = models.IntegerField(default=0, verbose_name='商品数量')
 
-    add_time = models.DateField(default=datetime.now, verbose_name=u'添加时间')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')
 
     class Meta:
@@ -47,7 +47,7 @@ class OrderInfo(models.Model):
     signer_name = models.CharField(max_length=20, default='', verbose_name='签收人')
     signer_mobile = models.CharField(max_length=11, verbose_name='联系电话')
 
-    add_time = models.DateField(default=datetime.now, verbose_name=u'添加时间')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')
 
     class Meta:
@@ -64,7 +64,7 @@ class OrderGoods(models.Model):
     goods = models.ForeignKey(Goods, verbose_name='商品', null=True, on_delete=models.SET_NULL)
     goods_num = models.IntegerField(default=0, verbose_name='商品数量')
 
-    add_time = models.DateField(default=datetime.now, verbose_name=u'添加时间')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')
 
     class Meta:

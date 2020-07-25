@@ -15,7 +15,7 @@ class UserFav(models.Model):
     user = models.ForeignKey(User, verbose_name='用户', null=True, on_delete=models.SET_NULL)
     goods = models.ForeignKey(Goods, verbose_name='商品', null=True, on_delete=models.SET_NULL)
 
-    add_time = models.DateField(default=datetime.now, verbose_name=u'添加时间')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')
 
     class Meta:
@@ -42,7 +42,7 @@ class UserLeavingMessage(models.Model):
     message = models.TextField(default='', verbose_name='留言内容', help_text='留言内容')
     file = models.FileField(verbose_name='上传的文件', help_text='上传的文件')
 
-    add_time = models.DateField(default=datetime.now, verbose_name=u'添加时间')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')
 
     class Meta:
@@ -61,7 +61,7 @@ class UserAddress(models.Model):
     signer_name = models.CharField(max_length=20, default='', verbose_name='签收人')
     signer_mobile = models.CharField(max_length=11, default='', verbose_name='联系电话')
 
-    add_time = models.DateField(default=datetime.now, verbose_name=u'添加时间')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')
 
     class Meta:

@@ -49,7 +49,9 @@ INSTALLED_APPS = [
     'DjangoUeditor',
     'xadmin',
     'crispy_forms',
-    'django.contrib.admin'
+    'django.contrib.admin',
+    'rest_framework',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -139,3 +141,8 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# DRF配置
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}

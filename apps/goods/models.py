@@ -18,7 +18,7 @@ class GoodsCategory(models.Model):
     category_type = models.IntegerField(choices=CATEGORY_TYPE, verbose_name='类目级别', help_text='类目级别')
     parent_category = models.ForeignKey('self', null=True, blank=True, verbose_name='父类别', related_name='sub_cat', on_delete=models.SET_NULL)
     is_tab = models.BooleanField(default=False, verbose_name='是否导航', help_text='是否导航')
-    add_time = models.DateField(default=datetime.now, verbose_name=u'添加时间')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')
 
     class Meta:
@@ -35,7 +35,7 @@ class GoodsCategoryBrand(models.Model):
     name = models.CharField(default='', max_length=30, verbose_name='品牌名', help_text='品牌名')
     desc = models.TextField(default='', max_length=200, verbose_name='品牌描述', help_text='品牌描述')
     image = models.ImageField(max_length=200, upload_to='brands/')
-    add_time = models.DateField(default=datetime.now, verbose_name=u'添加时间')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')
 
     class Meta:
@@ -64,7 +64,7 @@ class Goods(models.Model):
     is_new = models.BooleanField(default=False, verbose_name='是否新品')
     is_hot = models.BooleanField(default=False, verbose_name='是否热销')
 
-    add_time = models.DateField(default=datetime.now, verbose_name=u'添加时间')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')
 
     class Meta:
@@ -81,7 +81,7 @@ class GoodsImage(models.Model):
     image = models.ImageField(upload_to='', null=True, blank=True, verbose_name='图片')
     image_url = models.CharField(max_length=300, null=True, blank=True, verbose_name='图片链接')
 
-    add_time = models.DateField(default=datetime.now, verbose_name=u'添加时间')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u'添加时间')
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')
 
     class Meta:
@@ -98,7 +98,7 @@ class Banner(models.Model):
     image = models.ImageField(upload_to='banner', verbose_name='轮播图片')
     index = models.IntegerField(default=0, verbose_name='轮播顺序')
 
-    add_time = models.DateField(default=datetime.now, verbose_name='添加时间')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')
 
     class Meta:

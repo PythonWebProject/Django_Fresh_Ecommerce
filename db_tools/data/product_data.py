@@ -218,7 +218,7 @@ raw_data = [
     },
     {
         'images': [
-            'images/201705/goods_img/53_P_1495068879687.jpg'
+            'goods/images/53_P_1495068879687.jpg'
         ],
         'categorys': [
             '首页',

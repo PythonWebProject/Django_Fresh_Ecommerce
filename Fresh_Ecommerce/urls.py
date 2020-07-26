@@ -21,7 +21,7 @@ from rest_framework.routers import DefaultRouter
 
 import xadmin
 from .settings import MEDIA_ROOT
-from goods.views import GoodsListViewSet
+from goods.views import GoodsListViewSet, CategoryViewSet
 
 # Create a router and register our viewsets with it.
 
@@ -29,6 +29,9 @@ router = DefaultRouter()
 
 # 配置goods的路由
 router.register(r'goods', GoodsListViewSet, basename='goods')
+
+# 配置categories的路由
+router.register(r'categorys', CategoryViewSet, basename='categorys')
 
 urlpatterns = [
        url(r'^xadmin/', xadmin.site.urls),

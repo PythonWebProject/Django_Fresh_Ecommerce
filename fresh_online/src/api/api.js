@@ -2,6 +2,7 @@ import axios from 'axios';
 
 
 let host = 'http://shop.projectsedu.com';
+let local_host = 'http://127.0.0.1:8000';
 
 //获取商品类别信息
 export const queryCategorygoods = params => { return axios.get(`${host}/indexgoods/`) }
@@ -15,10 +16,10 @@ export const bannerGoods = params => { return axios.get(`${host}/banners/`) }
 //获取商品类别信息
 export const getCategory = params => {
   if('id' in params){
-    return axios.get(`${host}/categorys/`+params.id+'/');
+    return axios.get(`${local_host}/categorys/`+params.id+'/');
   }
   else {
-    return axios.get(`${host}/categorys/`, params);
+    return axios.get(`${local_host}/categorys/`, params);
   }
 };
 
@@ -27,7 +28,7 @@ export const getCategory = params => {
 export const getHotSearch = params => { return axios.get(`${host}/hotsearchs/`) }
 
 //获取商品列表
-export const getGoods = params => { return axios.get(`${host}/goods/`, { params: params }) }
+export const getGoods = params => { return axios.get(`${local_host}/goods/`, { params: params }) }
 
 //商品详情
 export const getGoodsDetail = goodId => { return axios.get(`${host}/goods/${goodId}`+'/') }

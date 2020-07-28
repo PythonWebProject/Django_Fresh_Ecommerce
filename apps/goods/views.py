@@ -17,7 +17,7 @@ class GoodsPagination(PageNumberPagination):
 class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     '''商品列表页，并实现分页、搜索、过滤、排序'''
 
-    queryset = Goods.objects.filter(is_delete=False)
+    queryset = Goods.objects.filter(is_delete=False).order_by('id')
     serializer_class = GoodsSerializer
     pagination_class = GoodsPagination
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]

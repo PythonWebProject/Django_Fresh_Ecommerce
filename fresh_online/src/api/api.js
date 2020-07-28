@@ -55,12 +55,12 @@ export const getFav = goodsId => { return axios.get(`${host}/userfavs/`+goodsId+
 
 //登录
 export const login = params => {
-  return axios.post(`${host}/login/`, params)
+  return axios.post(`${local_host}/login/`, params)
 }
 
 //注册
 
-export const register = parmas => { return axios.post(`${host}/users/`, parmas) }
+export const register = parmas => { return axios.post(`${local_host}/users/`, parmas) }
 
 //短信
 export const getMessage = parmas => { return axios.post(`${host}/code/`, parmas) }

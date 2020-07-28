@@ -12,7 +12,7 @@ class UserProfile(AbstractUser):
     birthday = models.DateField(null=True, blank=True, verbose_name='出生日期')
     gender = models.CharField(max_length=6, choices=(('male', u'男'), ('female', u'女')), default='female',
                               verbose_name='性别')
-    mobile = models.CharField(max_length=11, verbose_name='电话')
+    mobile = models.CharField(max_length=11, null=True, blank=True, verbose_name='电话')
     email = models.CharField(max_length=50, null=True, blank=True, verbose_name='邮箱')
 
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')
@@ -26,6 +26,7 @@ class UserProfile(AbstractUser):
 
 
 class VerifyCode(models.Model):
+    '''短信验证码'''
     code = models.CharField(max_length=10, verbose_name='验证码')
     mobile = models.CharField(max_length=11, verbose_name='电话')
 

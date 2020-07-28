@@ -18,10 +18,13 @@ from django.conf.urls import url, include
 from django.views.static import serve
 from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken import views
+from rest_framework_jwt.views import obtain_jwt_token
 
 import xadmin
 from .settings import MEDIA_ROOT
 from goods.views import GoodsListViewSet, CategoryViewSet
+from users.views import SmsCodeViewSet, UserViewSet
 
 # Create a router and register our viewsets with it.
 
@@ -33,14 +36,26 @@ router.register(r'goods', GoodsListViewSet, basename='goods')
 # 配置categories的路由
 router.register(r'categorys', CategoryViewSet, basename='categorys')
 
+# 配置短信验证码路由
+router.register(r'codes', SmsCodeViewSet, basename='codes')
+
+# 配置注册路由
+router.register(r'users', UserViewSet, basename='users')
+
 urlpatterns = [
        url(r'^xadmin/', xadmin.site.urls),
        url(r'^media/(?P<path>.*)$', serve, {'document_root':MEDIA_ROOT}),
-       url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+       # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
        # 商品列表页
        url(r'^', include(router.urls)),
 
        # 文档路由
-       url(r'docs/', include_docs_urls(title='生鲜电商'))
+       url(r'docs/', include_docs_urls(title='生鲜电商')),
+
+       # DRF自带认证路由
+       url(r'^api-token-auth/', views.obtain_auth_token, name='api_token_auth'),
+
+       # JWT认证路由
+       url(r'^login/', obtain_jwt_token),
 ]

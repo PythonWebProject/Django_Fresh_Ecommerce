@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+import datetime
 import os
 import sys
 
@@ -18,7 +18,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE_DIR)
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -33,7 +32,6 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'users.UserProfile'
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.users.apps.UsersConfig',
+    'users.apps.UsersConfig',
     'goods.apps.GoodsConfig',
     'trade.apps.TradeConfig',
     'user_operation.apps.UserOperationConfig',
@@ -53,6 +51,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'corsheaders',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -90,7 +89,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Fresh_Ecommerce.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -100,11 +98,10 @@ DATABASES = {
         'NAME': 'fresh_ec',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST':'127.0.0.1',
+        'HOST': '127.0.0.1',
         'OPTIONS': {'init_command': 'SET default_storage_engine=INNODB;'}
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -124,7 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -138,7 +134,6 @@ USE_L10N = True
 
 USE_TZ = False
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
@@ -149,5 +144,29 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # DRF配置
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
 }
+
+# 自定义用户认证配置
+AUTHENTICATION_BACKENDS = [
+    'users.views.CustomBackend',
+]
+
+# JWT配置
+JWT_AUTH = {
+    # 过期时间
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    # 请求头前缀
+    'JWT_AUTH_HEADER_PREFIX': 'JWT',
+}
+
+# 手机号码验证正则表达式
+REGEX_MOBILE = '^1[35789]\d{9}$|^147\d{8}$'
+
+# 云片网APIKEY
+APIKEY = 'edf71361381f31b3957beda37f20xxxx' # 更换为自己的API_KEY

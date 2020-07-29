@@ -80,7 +80,7 @@ class UserViewSet(CreateModelMixin, viewsets.GenericViewSet):
         payload = jwt_payload_handler(user)
         re_dict['token'] = jwt_encode_handler(payload)
         re_dict['name'] = user.name if user.name else user.username
-        headers = self.get_success_headers(serializer.data)
+        headers = self.get_success_headers(re_dict)
         return Response(re_dict, status=status.HTTP_201_CREATED, headers=headers)
 
     def perform_create(self, serializer):

@@ -77,7 +77,7 @@ class Goods(models.Model):
 
 class GoodsImage(models.Model):
     '''商品轮播图'''
-    goods = models.ForeignKey(Goods, verbose_name='', related_name='商品', null=True, on_delete=models.SET_NULL)
+    goods = models.ForeignKey(Goods, verbose_name='商品', related_name='images', null=True, on_delete=models.SET_NULL)
     image = models.ImageField(upload_to='', null=True, blank=True, verbose_name='图片')
     image_url = models.CharField(max_length=300, null=True, blank=True, verbose_name='图片链接')
 

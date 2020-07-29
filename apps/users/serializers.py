@@ -37,7 +37,7 @@ class SmsSerializer(serializers.Serializer):
 
 class UserRegSerializer(serializers.ModelSerializer):
     '''用户序列化'''
-    code = serializers.CharField(max_length=4, min_length=4, label='验证码', write_only=True,
+    code = serializers.CharField(required=True, max_length=4, min_length=4, label='验证码', write_only=True,
                                  help_text='验证码',
                                  error_messages={
                                      'required': '请输入验证码',

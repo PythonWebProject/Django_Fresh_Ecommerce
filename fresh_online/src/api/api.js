@@ -31,7 +31,7 @@ export const getHotSearch = params => { return axios.get(`${host}/hotsearchs/`) 
 export const getGoods = params => { return axios.get(`${local_host}/goods/`, { params: params }) }
 
 //商品详情
-export const getGoodsDetail = goodId => { return axios.get(`${host}/goods/${goodId}`+'/') }
+export const getGoodsDetail = goodId => { return axios.get(`${local_host}/goods/${goodId}`+'/') }
 
 //获取购物车商品
 export const getShopCarts = params => { return axios.get(`${host}/shopcarts/`) }
@@ -43,15 +43,15 @@ export const updateShopCart = (goodsId, params) => { return axios.patch(`${host}
 export const deleteShopCart = goodsId => { return axios.delete(`${host}/shopcarts/`+goodsId+'/') }
 
 //收藏
-export const addFav = params => { return axios.post(`${host}/userfavs/`, params) }
+export const addFav = params => { return axios.post(`${local_host}/userfavs/`, params) }
 
 //取消收藏
-export const delFav = goodsId => { return axios.delete(`${host}/userfavs/`+goodsId+'/') }
+export const delFav = goodsId => { return axios.delete(`${local_host}/userfavs/`+goodsId+'/') }
 
 export const getAllFavs = () => { return axios.get(`${host}/userfavs/`) }
 
 //判断是否收藏
-export const getFav = goodsId => { return axios.get(`${host}/userfavs/`+goodsId+'/') }
+export const getFav = goodsId => { return axios.get(`${local_host}/userfavs/`+goodsId+'/') }
 
 //登录
 export const login = params => {

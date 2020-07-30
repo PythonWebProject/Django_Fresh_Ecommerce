@@ -4,12 +4,15 @@ from django.db.models import Q
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets, status
-from rest_framework.mixins import CreateModelMixin
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication
 from rest_framework_jwt.serializers import jwt_encode_handler, jwt_payload_handler
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from .models import VerifyCode
-from .serializers import SmsSerializer, UserRegSerializer
+from .serializers import SmsSerializer, UserRegSerializer, UserDetailSerializer
 from utils.yunpian import yunpian
 
 
@@ -31,7 +34,11 @@ class CustomBackend(ModelBackend):
 
 
 class SmsCodeViewSet(CreateModelMixin, viewsets.GenericViewSet):
-    '''发送短信验证码'''
+    '''
+    发送短信验证码
+    create:
+        新增短信验证码
+    '''
 
     serializer_class = SmsSerializer
 
@@ -66,11 +73,38 @@ class SmsCodeViewSet(CreateModelMixin, viewsets.GenericViewSet):
             }, status=status.HTTP_201_CREATED)
 
 
-class UserViewSet(CreateModelMixin, viewsets.GenericViewSet):
-    '''用户'''
+class UserViewSet(CreateModelMixin, UpdateModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
+    '''
+    用户
+    create:
+        新增用户
+    update:
+        修改用户
+    partial_update:
+        部分修改
+    retrieve:
+        用户详情
+    '''
 
     serializer_class = UserRegSerializer
     queryset = User.objects.filter(is_delete=False)
+    authentication_classes = [SessionAuthentication, JSONWebTokenAuthentication]
+
+    def get_permissions(self):
+        '''动态设置权限'''
+        if self.action == 'retrieve':
+            return [IsAuthenticated()]
+        elif self.action == 'create':
+            return []
+        return []
+
+    def get_serializer_class(self):
+        '''动态设置序列化'''
+        if self.action == 'retrieve':
+            return UserDetailSerializer
+        elif self.action == 'create':
+            return UserRegSerializer
+        return UserDetailSerializer
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -84,4 +118,7 @@ class UserViewSet(CreateModelMixin, viewsets.GenericViewSet):
         return Response(re_dict, status=status.HTTP_201_CREATED, headers=headers)
 
     def perform_create(self, serializer):
-         return serializer.save()
+        return serializer.save()
+
+    def get_object(self):
+        return self.request.user

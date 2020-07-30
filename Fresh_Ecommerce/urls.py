@@ -25,7 +25,7 @@ import xadmin
 from .settings import MEDIA_ROOT
 from goods.views import GoodsListViewSet, CategoryViewSet
 from users.views import SmsCodeViewSet, UserViewSet
-from user_operation.views import UserFavViewSet
+from user_operation.views import UserFavViewSet, LeavingMessageViewSet, AddressViewSet
 
 # Create a router and register our viewsets with it.
 
@@ -45,6 +45,12 @@ router.register(r'users', UserViewSet, basename='users')
 
 # 配置收藏路由
 router.register(r'userfavs', UserFavViewSet, basename='userfavs')
+
+# 配置收藏路由
+router.register(r'userfavs', UserFavViewSet, basename='userfavs')
+
+# 配置收货地址路由
+router.register(r'address', AddressViewSet, basename='address')
 
 urlpatterns = [
        url(r'^xadmin/', xadmin.site.urls),

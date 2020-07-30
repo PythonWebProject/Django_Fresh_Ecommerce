@@ -145,6 +145,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # DRF配置
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
@@ -159,7 +160,9 @@ AUTHENTICATION_BACKENDS = [
 # JWT配置
 JWT_AUTH = {
     # 过期时间
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    # 刷新过期时间
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=30),
     # 请求头前缀
     'JWT_AUTH_HEADER_PREFIX': 'JWT',
 }

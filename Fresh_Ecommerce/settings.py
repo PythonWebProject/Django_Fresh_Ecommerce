@@ -137,8 +137,13 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+# 静态资源设置
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
+# 媒体资源设置
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -172,3 +177,10 @@ REGEX_MOBILE = '^1[35789]\d{9}$|^147\d{8}$'
 
 # 云片网APIKEY
 APIKEY = 'edf71361381f31b3957beda37f20xxxx' # 更换为自己的API_KEY
+
+# 支付宝相关配置
+app_private_key_path = os.path.join(BASE_DIR, 'apps/trade/keys/app_private.txt')
+alipay_public_key_path = os.path.join(BASE_DIR, 'apps/trade/keys/ali_public.txt')
+ali_app_id = "2021000116666333"
+return_url = 'http://127.0.0.1:8000/alipay/return/'
+notify_url = 'http://127.0.0.1:8000/alipay/return/'

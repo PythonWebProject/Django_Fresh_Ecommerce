@@ -163,6 +163,8 @@
 
           // 更新store数据
           this.$store.dispatch('setShopList');
+          //更新总价
+          this.setTotalPrice();
 
         }).catch(function (error) {
           console.log(error);
@@ -216,7 +218,7 @@
         });
       },
       addAddr () { //添加地址
-
+        
       },
       selectAddr (id) { //选择配送地址
         this.addressActive = id;
@@ -235,7 +237,7 @@
         this.signer_name = cur_name
       },
       balanceCount () { // 结算
-          if(this.addrInfo.length==0){
+          if(this.address==''){
               alert("请选择收货地址")
           }else{
             createOrder(
@@ -243,7 +245,7 @@
                 post_script:this.post_script,
                 address:this.address,
                 signer_name:this.signer_name,
-                singer_mobile:this.signer_mobile,
+                signer_mobile:this.signer_mobile,
                 order_mount:this.totalPrice
               }
             ).then((response)=> {

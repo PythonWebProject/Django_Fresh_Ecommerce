@@ -6,7 +6,7 @@
                     <div class="userCenterBox boxCenterList clearfix" style="_height:1%;">
                         <h5><span>订单状态</span></h5>
                         <div class="blank"></div>
-                        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+                        <table width="100%" border="1" cellpadding="5" cellspacing="1" bgcolor="#09C762">
                             <tbody>
                                 <tr>
                                     <td width="15%" align="right" bgcolor="#ffffff">订单号：</td>
@@ -27,7 +27,7 @@
                         <span>商品列表</span>
                     </h5>
                     <div class="blank"></div>
-                    <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+                    <table width="100%" border="1" cellpadding="5" cellspacing="1" bgcolor="#09C762">
                         <tbody>
                             <tr>
                                 <th width="30%" align="center" bgcolor="#ffffff">商品名称</th>
@@ -57,7 +57,7 @@
                     <h5><span>收货人信息</span></h5>
                     <div class="blank"></div>
                     <form name="formAddress" id="formAddress">
-                        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+                        <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#09C762">
                             <tbody>
                             <tr>
                                 <td width="15%" align="right" bgcolor="#ffffff">收货人姓名： </td>
@@ -70,7 +70,7 @@
 
                             <tr>
                                 <td align="right" bgcolor="#ffffff">电话： </td>
-                                <td align="left" bgcolor="#ffffff"><input name="address" type="text" class="inputBg" v-model="orderInfo.singer_mobile" size="25"></td>
+                                <td align="left" bgcolor="#ffffff"><input name="address" type="text" class="inputBg" v-model="orderInfo.signer_mobile" size="25"></td>
                             </tr>
                         </tbody>
                     </table>

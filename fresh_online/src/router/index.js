@@ -321,6 +321,7 @@ router.beforeEach((to, from, next) => {
     next({
       path: '/app/home/member/order',
     });
+    location.reload();
   }else{
     if(to!=undefined){
       if(to.meta.need_log){

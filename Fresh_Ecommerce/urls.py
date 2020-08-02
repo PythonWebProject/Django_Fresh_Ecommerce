@@ -16,6 +16,8 @@ Including another URLconf
 # from django.contrib import admin
 from django.conf.urls import url, include
 from django.views.static import serve
+from django.views.generic import TemplateView
+from django.views.generic.base import RedirectView
 from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
@@ -26,6 +28,7 @@ from .settings import MEDIA_ROOT
 from goods.views import GoodsListViewSet, CategoryViewSet
 from users.views import SmsCodeViewSet, UserViewSet
 from user_operation.views import UserFavViewSet, LeavingMessageViewSet, AddressViewSet
+from trade.views import ShoppingCartViewSet, OrderViewSet, AliPayView
 
 # Create a router and register our viewsets with it.
 
@@ -46,11 +49,17 @@ router.register(r'users', UserViewSet, basename='users')
 # 配置收藏路由
 router.register(r'userfavs', UserFavViewSet, basename='userfavs')
 
-# 配置收藏路由
-router.register(r'userfavs', UserFavViewSet, basename='userfavs')
+# 配置留言路由
+router.register(r'messages', LeavingMessageViewSet, basename='messages')
 
 # 配置收货地址路由
 router.register(r'address', AddressViewSet, basename='address')
+
+# 配置购物车路由
+router.register(r'shopcarts', ShoppingCartViewSet, basename='shopcarts')
+
+# 配置下订单路由
+router.register(r'orders', OrderViewSet, basename='orders')
 
 urlpatterns = [
        url(r'^xadmin/', xadmin.site.urls),
@@ -68,4 +77,10 @@ urlpatterns = [
 
        # JWT认证路由
        url(r'^login/', obtain_jwt_token),
+
+       # 支付宝结果返回接口
+       url(r'^alipay/return/', AliPayView.as_view(), name='alipay'),
+
+       # 配置favicon路由
+       url(r'^favicon\.ico$', RedirectView.as_view(url=r'static/img/favicon.ico')),
 ]

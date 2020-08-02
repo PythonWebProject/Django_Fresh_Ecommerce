@@ -21,7 +21,8 @@
                                     <td align="right" bgcolor="#ffffff">￥{{item.order_mount}}元</td>
                                     <td v-if="item.pay_status == 'paying' " align="center" bgcolor="#ffffff">待支付</td>
                                     <td v-if="item.pay_status == 'TRADE_SUCCESS' " align="center" bgcolor="#ffffff">已支付</td>
-                                    <td align="center" bgcolor="#ffffff"><font class="f6"><a @click="cancelOrder(item.id)">取消订单</a></font></td>
+                                    <td v-if="item.pay_status == 'paying' " align="center" bgcolor="#ffffff"><font class="f6"><a @click="cancelOrder(item.id)">取消订单</a></font></td>
+                                    <td v-if="item.pay_status == 'TRADE_SUCCESS' " align="center" bgcolor="#ffffff"><font class="f6"><a @click="cancelOrder(item.id)" style="pointer-events:none;">取消订单</a></font></td>
                                 </tr>
                             </tbody>
                         </table>

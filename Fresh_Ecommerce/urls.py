@@ -16,7 +16,6 @@ Including another URLconf
 # from django.contrib import admin
 from django.conf.urls import url, include
 from django.views.static import serve
-from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
@@ -25,7 +24,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 
 import xadmin
 from .settings import MEDIA_ROOT
-from goods.views import GoodsListViewSet, CategoryViewSet
+from goods.views import GoodsListViewSet, CategoryViewSet, BannerViewSet, IndexCategoryViewSet
 from users.views import SmsCodeViewSet, UserViewSet
 from user_operation.views import UserFavViewSet, LeavingMessageViewSet, AddressViewSet
 from trade.views import ShoppingCartViewSet, OrderViewSet, AliPayView
@@ -60,6 +59,12 @@ router.register(r'shopcarts', ShoppingCartViewSet, basename='shopcarts')
 
 # 配置下订单路由
 router.register(r'orders', OrderViewSet, basename='orders')
+
+# 配置轮播图路由
+router.register(r'banners', BannerViewSet, basename='banners')
+
+# 配置首页商品系列路由
+router.register(r'indexgoods', IndexCategoryViewSet, basename='indexgoods')
 
 urlpatterns = [
        url(r'^xadmin/', xadmin.site.urls),

@@ -118,7 +118,7 @@ class OrderDetailSerializer(serializers.ModelSerializer):
             return_url=return_url,
             notify_url=notify_url
         )
-        pay_url = alipay.gateway + '?' + order_string
+        pay_url = alipay._gateway + '?' + order_string
         return pay_url
 
     class Meta:

@@ -34,7 +34,8 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
 			template: 'template.html',
-			inject: true
+			inject: true,
+      favicon: path.resolve('favicon.ico')
 		}),
 		//new webpack.optimize.CommonsChunkPlugin({name:'vendor',filename:'vendor.bundle.js'})
 

@@ -154,7 +154,15 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    ]
+    ],
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '30/hour',
+        'user': '500/hour'
+    }
 }
 
 # 自定义用户认证配置
@@ -184,3 +192,19 @@ alipay_public_key_path = os.path.join(BASE_DIR, 'apps/trade/keys/ali_public.txt'
 ali_app_id = "2021000116666333"
 return_url = 'http://127.0.0.1:8000/alipay/return/'
 notify_url = 'http://127.0.0.1:8000/alipay/return/'
+
+# drf-extensions配置
+REST_FRAMEWORK_EXTENSIONS = {
+    'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60 * 15
+}
+
+# Redis缓存配置
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
